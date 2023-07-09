@@ -1,0 +1,25 @@
+name: GitHub actions showcase
+
+on: [workflow_dispatch]
+
+jobs:
+  explore_github_actions:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: echo "Username is ${{github.actor}}"
+      
+      - name: Display runner os
+        run: echo "Runner os is ${{runner.os}}"
+      
+      - run: echo "Repository is ${{ github.repository }} and branch is ${{ github.ref }}"
+      
+      - run: echo "Event ${{github.event_name}} triggered the workflow"
+      
+      - name: Runner comes with preinstalled software
+        run: |
+          echo "Display software versions"
+          git -v
+          docker -v
+          node -v
+          java -version
