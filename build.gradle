@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id "fr.brouillard.oss.gradle.jgitver" version "0.9.1"
+    id 'maven-publish'
+}
+
+jgitver {
+  nonQualifierBranches "master,main"
+}
+
+
+group = 'com.kanezi.github'
+
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+}
+
+java {
+	withSourcesJar()
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/kanezi/uuid-timestamp-generator"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+
+
+    publications {
+        maven(MavenPublication) {
+	      from components.java
+        }
+    }
+}
+
