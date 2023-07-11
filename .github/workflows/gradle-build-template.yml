@@ -20,7 +20,7 @@ jobs:
     - name: Set up JDK ${{matrix.jdk_version}}
       uses: actions/setup-java@v3
       with:
-        java-version: ${{matrix.jdk_version}
+        java-version: ${{matrix.jdk_version}}
         distribution: 'temurin'
         cache: 'gradle'
         
