@@ -1,0 +1,10 @@
+name: Java Build with Gradle
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    uses: ./.github/workflows/gradle-build-template.yml
+
