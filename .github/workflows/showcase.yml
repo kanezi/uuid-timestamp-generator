@@ -1,6 +1,11 @@
 name: GitHub actions showcase
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+      environment_name:
+        description: environment name
+        required: true
 
 jobs:
   explore_github_actions:
@@ -31,3 +36,21 @@ jobs:
       
       - name: List files in the repository after checkout
         run: ls ${{ github.workspace }}
+
+  display_info:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: echo "${{github.event.inputs.environment_name}}"     
+      
+      - name: output workflow execution summary
+        run: |
+          echo "var | value" >> $GITHUB_STEP_SUMMARY
+          echo "--- | ---" >> $GITHUB_STEP_SUMMARY
+          echo "run id | $GITHUB_RUN_ID" >> $GITHUB_STEP_SUMMARY
+          echo "actor | $GITHUB_ACTOR" >> $GITHUB_STEP_SUMMARY
+          echo "repository|$GITHUB_REPOSITORY" >> $GITHUB_STEP_SUMMARY
+          echo "branch|$GITHUB_REF" >> $GITHUB_STEP_SUMMARY
+          echo "os|$RUNNER_OS" >> $GITHUB_STEP_SUMMARY
+          
+      
